@@ -24,6 +24,17 @@ const authLimiter = rateLimit({
   max: 1000, // limit each IP to 1000 requests per windowMs
 });
 
+app.use("/users/login", authLimiter);
+app.use("/users/register", authLimiter);
+
+/* Set up routes with our server instance */
+const usersRoute = require("./routes/users.js");
+const diariesRoute = require("./routes/diaries.js");
+
+// only use the custom middleware for the secondpath route
+app.use("/users", usersRoute);
+// app.use("/diaries", diariesRoute);
+
 // Start the server
 const port = 8899;
 
