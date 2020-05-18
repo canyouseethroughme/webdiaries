@@ -13,6 +13,7 @@ const { isAuthenticated } = require("../middleware/auth");
 // Nodemailer
 const { transporter } = require("../config/nodemailer");
 
+// user login route
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
@@ -70,6 +71,87 @@ router.post("/login", async (req, res) => {
       console.log(`Error on login route with message: ${err}`);
       return;
     }
+  }
+});
+
+// user signup route
+router.post("/signup", (req, res) => {
+  const {
+    username,
+    password,
+    repeatedPassword,
+    firstName,
+    lastName,
+    email,
+  } = req.body;
+
+  if (
+    username &&
+    password &&
+    repeatedPassword &&
+    password === repeatedPassword &&
+    email
+  ) {
+    if (password.length < 7) {
+      return res
+        .status(404)
+        .send({ response: "inserted password is too short" });
+    } else {
+      bcrypt.hash(password, saltRounds, async (error, hashedPass) => {
+        if (error) {
+          return res.status(500).send({ response: `error in db ${error}` });
+        }
+
+        try {
+          const existingUser = await User.query()
+            .select()
+            .where({ username })
+            .limit(1);
+
+          if (existingUser[0]) {
+            return res.status(404).send({ response: "user already exists" });
+          } else {
+            const newUser = await User.query().insert({
+              username,
+              password: hashedPass,
+              first_name: firstName,
+              last_name: lastName,
+              email,
+            });
+            // NODEMAILER
+            const mailOptions = {
+              from: "WebDiaries",
+              to: email,
+              subject: "WebDiaries Account Created",
+              text: `Welcome, ${username} to your online diary.`,
+            };
+            transporter.sendMail(mailOptions, (err, data) => {
+              if (err) {
+                res
+                  .status(403)
+                  .json({ response: "Problems creating the account, ", err });
+                console.log("Email error", err);
+                return;
+              } else {
+                return res.status(200).send({ response: newUser.username });
+              }
+            });
+            // #################
+          }
+        } catch (err) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+        }
+      });
+    }
+  } else if (password !== repeatedPassword) {
+    return res
+      .status(404)
+      .send({ response: "password and repeated password are not the same" });
+  } else {
+    return res.status(404).send({ response: "missing fields" });
   }
 });
 
