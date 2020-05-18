@@ -122,7 +122,7 @@ router.post("/signup", (req, res) => {
               from: "WebDiaries",
               to: email,
               subject: "WebDiaries Account Created",
-              text: `Welcome, ${username} to your online diary.`,
+              text: `Welcome to WebDiaries, ${username}. Here you can write and store your diaries, memories and notes.`,
             };
             transporter.sendMail(mailOptions, (err, data) => {
               if (err) {
