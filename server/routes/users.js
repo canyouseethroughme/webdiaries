@@ -12,7 +12,7 @@ const Diary = require("../models/Diary");
 const { isAuthenticated } = require("../middleware/auth");
 // Nodemailer
 const { transporter } = require("../config/nodemailer");
-
+// #######################################################################################
 // user login route
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
         } else {
           const token = jwt.sign(
             { userId: user.id, username: user.username },
-            "mysecretkey"
+            "averysecretkeythatisveryhardtofind"
           );
           const previousToken = await Token.query()
             .select()
@@ -73,7 +73,7 @@ router.post("/login", async (req, res) => {
     }
   }
 });
-
+// #######################################################################################
 // user signup route
 router.post("/signup", (req, res) => {
   const {
@@ -153,6 +153,54 @@ router.post("/signup", (req, res) => {
   } else {
     return res.status(404).send({ response: "missing fields" });
   }
+});
+
+// #######################################################################################
+// user delete route
+router.delete("/delete-account", isAuthenticated, async (req, res) => {
+  try {
+    const deleteUser = await User.query().where({ id: req.userId }).del();
+    res.status(200).send({ deletedUser: deleteUser });
+  } catch (err) {
+    if (err) {
+      console.log(`delete user error: ${err}`);
+      return;
+    }
+  }
+});
+
+// #######################################################################################
+// user forgot password route
+router.post("/forgot-password", async (req, res) => {
+  const { email } = req.body;
+
+  const token = await jwt.sign({ email }, "averysecretkeythatisveryhardtofind");
+
+  await User.query()
+    .select()
+    .where({ email })
+    .update({ reset_password: token });
+
+  // NODEMAILER
+  const mailOptions = {
+    from: "WebDiaries",
+    to: email,
+    subject: "Reset password for WebDiaries",
+    text: `Visit this link to reset your password for WebDiaries.
+http://localhost:3000/update-password/${token}
+      `,
+  };
+  transporter.sendMail(mailOptions, (err, data) => {
+    if (err) {
+      res
+        .status(403)
+        .send({ response: "problems reseting your password, ", err });
+      return;
+    } else {
+      res.status(200).send({ response: `reset password for ${email}` });
+    }
+  });
+  // #################
 });
 
 module.exports = router;
