@@ -115,7 +115,7 @@ router.delete("/delete-diary/:id", isAuthenticated, async (req, res) => {
   try {
     const diary = await Diary.query().select().where({ id: diaryId });
     const user = await User.query().select().where({ id: req.userId });
-    // update diary only for the logged in user
+    // delete diary only for the logged in user
     if (diary[0].user_id !== user[0].id) {
       res
         .status(401)
