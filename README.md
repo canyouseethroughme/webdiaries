@@ -15,6 +15,6 @@ Steps to follow to setup the project:
 the username and password with your credentials.
 4. Open a CLI, navigate to the folder /server/ and run ```npm i```
 5. After all the packages are installed, while still in the server folder, run the following commands, 
-in this order: ```npm run migrate:rollback```,  ```npm run migrate:latest``` and finally  ```npm run seed:run```
+in this order: ```npm run m:rollback```,  ```npm run m:latest``` and finally  ```npm run s:run```
 6. When all the migrations and seeds completed, you can start the server by running ```npm run start-dev``` and in the 
 terminal the message server is listening on port 8899 should appear.
