@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken");
 // Models
 const User = require("../models/User");
 const Token = require("../models/Token");
-const Diary = require("../models/Diary");
 // Authentification
 const { isAuthenticated } = require("../middleware/auth");
 // Nodemailer
@@ -202,5 +201,41 @@ http://localhost:3000/update-password/${token}
   });
   // #################
 });
+
+// #######################################################################################
+// user update password route
+router.put("/update-password/:token", async (req, res) => {
+  const { newPassword, newRepeatedPassword } = req.body;
+  const token = req.params.token;
+
+  try {
+    if (token && newPassword === newRepeatedPassword) {
+      bcrypt.hash(newPassword, saltRounds, async (error, hashedPass) => {
+        if (error) {
+          return res
+            .status(401)
+            .send({ response: `error updating your password with ${error}` });
+        }
+        await User.query()
+          .where({ reset_password: token })
+          .update({ password: hashedPass });
+
+        const users = await User.query()
+          .select()
+          .where({ reset_password: token })
+          .limit(1);
+        const user = users[0];
+
+        res.status(200).send({ response: user.username });
+      });
+    }
+  } catch (err) {
+    if (err) {
+      console.log(`error updating your password ${err}`);
+      return;
+    }
+  }
+});
+// #######################################################################################
 
 module.exports = router;
