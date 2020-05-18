@@ -4,11 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "migrate:make": "knex migrate:make",
-    "migrate:latest": "knex migrate:latest",
-    "migrate:rollback": "knex migrate:rollback",
-    "seed:make": "knex seed:make",
-    "seed:run": "knex seed:run",
+    "m:make": "knex migrate:make",
+    "m:latest": "knex migrate:latest",
+    "m:rollback": "knex migrate:rollback",
+    "s:make": "knex seed:make",
+    "s:run": "knex seed:run",
     "start-dev": "cross-env PORT=9090 npx nodemon app.js",
     "start-prod": "cross-env PORT=80 node app.js"
   },
