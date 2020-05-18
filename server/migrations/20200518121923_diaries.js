@@ -2,7 +2,7 @@ exports.up = function (knex) {
   return knex.schema.createTable("diaries", (table) => {
     table.increments("id");
     table.string("title").notNullable();
-    table.text("text", "longtext");
+    table.text("text", "longtext").notNullable();
     table.boolean("favorite");
     table.integer("user_id").unsigned().notNullable();
     table.foreign("user_id").references("users.id").onDelete("CASCADE");

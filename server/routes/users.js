@@ -46,14 +46,14 @@ router.post("/login", async (req, res) => {
           if (!previousToken[0]) {
             await Token.query().insert({
               token,
-              ttl: 360000,
+              ttl: 3600000,
               user_id: user.id,
             });
           } else {
             await Token.query().where({ user_id: user.id }).del();
             await Token.query().insert({
               token,
-              ttl: 360000,
+              ttl: 3600000,
               user_id: user.id,
             });
           }
@@ -226,7 +226,9 @@ router.put("/update-password/:token", async (req, res) => {
           .limit(1);
         const user = users[0];
 
-        res.status(200).send({ response: user.username });
+        res.status(200).send({
+          response: `username: ${user.username} & email: ${user.email}`,
+        });
       });
     }
   } catch (err) {

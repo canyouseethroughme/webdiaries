@@ -33,7 +33,7 @@ const diariesRoute = require("./routes/diaries.js");
 
 // only use the custom middleware for the secondpath route
 app.use("/users", usersRoute);
-// app.use("/diaries", diariesRoute);
+app.use("/diaries", diariesRoute);
 
 // Start the server
 const port = 8899;
