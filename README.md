@@ -11,7 +11,7 @@ Steps to follow to setup the project:
 
 Log in into your local MySQL DB, using a CLI or any GUI.
 Create a database for the current project.
-Navigate to the /server/config/ and create a file "db_credentials.js" by copying the template and replace the database name, 
+Navigate to the /server/config/ and duplicate the ```dbcredentials_template.js``` file into ```dbcredentials.js``` and replace the database name, 
 the username and password with your credentials.
 Open a CLI, navigate to the folder /server/ and run ```npm i```
 After all the packages are installed, while still in the server folder, run the following commands, 
