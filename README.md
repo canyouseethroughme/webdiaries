@@ -1,7 +1,7 @@
 # webdiaries
 Online web app for your diaries build with ReactJS on the frontend and with NodeJS, ExpressJS and JWT in the backend, using a MySQL database.
 
-## Server side configuration
+## Server configuration
 
 The server side represents the back-end which is built with Node.js and Express.
 
