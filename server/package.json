@@ -9,7 +9,7 @@
     "m:rollback": "knex migrate:rollback",
     "s:make": "knex seed:make",
     "s:run": "knex seed:run",
-    "start-dev": "cross-env PORT=9090 npx nodemon app.js",
+    "start-dev": "cross-env PORT=8899 npx nodemon app.js",
     "start-prod": "cross-env PORT=80 node app.js"
   },
   "dependencies": {
