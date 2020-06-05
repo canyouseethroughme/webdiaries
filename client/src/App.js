@@ -6,6 +6,7 @@ import "./App.css";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
+import UpdatePassword from "./pages/UpdatePassword";
 import Diaries from "./pages/Diaries";
 
 const App = () => {
@@ -16,6 +17,8 @@ const App = () => {
       <Route path="/sign-up" component={Signup} />
 
       <Route path="/forgot-password" component={ForgotPassword} />
+
+      <Route path="/update-password" component={UpdatePassword} />
 
       <Route path="/diaries" component={Diaries} />
     </Switch>

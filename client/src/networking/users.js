@@ -11,7 +11,11 @@ export const signup = async (data) => {
   return axios.post(`${localhost}${url}/signup`, data);
 };
 
-export const forgotPassword = async (token, data) => {
+export const forgotPassword = async (data) => {
+  return axios.post(`${localhost}${url}/forgot-password`, data);
+};
+
+export const updatePassword = async (token, data) => {
   return axios.put(`${localhost}${url}/update-password/${token}`, data);
 };
 

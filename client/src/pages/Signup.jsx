@@ -25,7 +25,17 @@ const Signup = () => {
 
   const signupUser = async () => {
     try {
-      if (password !== repeatedPassword || password.length < 7) {
+      if (
+        username.length < 3 ||
+        firstName.length < 3 ||
+        lastName.length < 3 ||
+        email.length < 6
+      ) {
+        setError(true);
+        setTimeout(function () {
+          setError(false);
+        }, 2000);
+      } else if (password !== repeatedPassword || password.length < 7) {
         setPassError(true);
         setTimeout(function () {
           setPassError(false);
@@ -98,7 +108,7 @@ const Signup = () => {
         />
       </FormWrapper>
       {passError && <ErrorMessage>Passwords don't match.</ErrorMessage>}
-      {error && <ErrorMessage>Missing fields.</ErrorMessage>}
+      {error && <ErrorMessage>Missing or incomplete fields.</ErrorMessage>}
       <FormWrapper>
         <StyledParagraph>
           Already have an account? Log in{" "}

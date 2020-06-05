@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import { forgotPassword } from "../networking/users";
+import { updatePassword } from "../networking/users";
 
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -12,30 +12,33 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 import FormWrapper from "../components/FormWrapper";
 import StyledParagraph from "../components/StyledParagraph";
 
-const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(false);
+const UpdatePassword = () => {
+  const [newPassword, setPassword] = useState("");
+  const [newRepeatedPassword, setRepeatedPassword] = useState("");
+  const [passError, setPassError] = useState(false);
   const [error, setError] = useState(false);
   const history = useHistory();
 
-  const forgotPass = async () => {
+  const updatePass = async () => {
     try {
-      if (!email || email.length < 6) {
-        setEmailError(true);
+      if (newPassword !== newRepeatedPassword) {
+        setPassError(true);
         setTimeout(function () {
-          setEmailError(false);
+          setPassError(false);
+        }, 2000);
+      } else if (newPassword.length < 6) {
+        setError(true);
+        setTimeout(function () {
+          setError(false);
         }, 2000);
       } else {
-        await forgotPassword({ email });
+        const token = window.location.href.split("/")[4];
+        updatePassword(token, { newPassword, newRepeatedPassword });
         history.push("/");
       }
     } catch (err) {
-      setError(true);
-      setTimeout(function () {
-        setError(false);
-      }, 2000);
       console.log("====================================");
-      console.log("There is a forgot password problem. Error: ", err);
+      console.log("There is a update password problem. Error: ", err);
       console.log("====================================");
     }
   };
@@ -48,18 +51,27 @@ const ForgotPassword = () => {
       </FormWrapper>
       <FormWrapper>
         <Input
-          type="text"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Input
+          type="password"
+          placeholder="Repeat password"
+          onChange={(e) => setRepeatedPassword(e.target.value)}
         />
         <Button
           style={{ marginTop: "20px" }}
-          name="Reset password"
-          onClick={forgotPass}
+          name="Change password"
+          onClick={updatePass}
         />
       </FormWrapper>
-      {error && <ErrorMessage>Email not valid.</ErrorMessage>}
-      {emailError && <ErrorMessage>Please insert your email.</ErrorMessage>}
+      {error && (
+        <ErrorMessage>Password must have more than 6 characters.</ErrorMessage>
+      )}
+      {passError && (
+        <ErrorMessage>Inserted passwords don't match.</ErrorMessage>
+      )}
       <FormWrapper>
         <StyledParagraph>
           Don't have an account? Sign up{" "}
@@ -83,4 +95,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default UpdatePassword;
