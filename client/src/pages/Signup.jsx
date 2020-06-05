@@ -10,7 +10,7 @@ import Quote from "../components/Quote";
 import ErrorMessage from "../components/ErrorMessage";
 import BackgroundWrapper from "../components/BackgroundWrapper";
 import FormWrapper from "../components/FormWrapper";
-import StyledParagraph from "../components/StyledParagraph";
+import Paragraph from "../components/Paragraph";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -68,7 +68,7 @@ const Signup = () => {
     <BackgroundWrapper>
       <FormWrapper>
         <Title name="Web Diaries" />
-        <Quote>Your private online journal.</Quote>
+        <Quote name="Your private online journal." />
       </FormWrapper>
       <FormWrapper style={{ marginTop: "30px" }}>
         <Input
@@ -110,14 +110,14 @@ const Signup = () => {
       {passError && <ErrorMessage>Passwords don't match.</ErrorMessage>}
       {error && <ErrorMessage>Missing or incomplete fields.</ErrorMessage>}
       <FormWrapper>
-        <StyledParagraph>
+        <Paragraph>
           Already have an account? Log in{" "}
           <Link to="/" style={{ color: "#c29261", textDecoration: "none" }}>
             here
           </Link>
           .
-        </StyledParagraph>
-        <StyledParagraph>
+        </Paragraph>
+        <Paragraph>
           Forgot your password? Reset it{" "}
           <Link
             to="/forgot-password"
@@ -126,7 +126,7 @@ const Signup = () => {
             here
           </Link>
           .
-        </StyledParagraph>
+        </Paragraph>
       </FormWrapper>
     </BackgroundWrapper>
   );

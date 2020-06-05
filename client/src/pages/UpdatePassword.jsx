@@ -10,7 +10,7 @@ import Quote from "../components/Quote";
 import ErrorMessage from "../components/ErrorMessage";
 import BackgroundWrapper from "../components/BackgroundWrapper";
 import FormWrapper from "../components/FormWrapper";
-import StyledParagraph from "../components/StyledParagraph";
+import Paragraph from "../components/Paragraph";
 
 const UpdatePassword = () => {
   const [newPassword, setPassword] = useState("");
@@ -47,7 +47,7 @@ const UpdatePassword = () => {
     <BackgroundWrapper>
       <FormWrapper>
         <Title name="Web Diaries" />
-        <Quote>Your private online journal.</Quote>
+        <Quote name="Your private online journal." />
       </FormWrapper>
       <FormWrapper>
         <Input
@@ -73,7 +73,7 @@ const UpdatePassword = () => {
         <ErrorMessage>Inserted passwords don't match.</ErrorMessage>
       )}
       <FormWrapper>
-        <StyledParagraph>
+        <Paragraph>
           Don't have an account? Sign up{" "}
           <Link
             to="/sign-up"
@@ -82,14 +82,14 @@ const UpdatePassword = () => {
             here
           </Link>
           .
-        </StyledParagraph>
-        <StyledParagraph>
+        </Paragraph>
+        <Paragraph>
           Remembered your password? Log in{" "}
           <Link to="/" style={{ color: "#c29261", textDecoration: "none" }}>
             here
           </Link>
           .
-        </StyledParagraph>
+        </Paragraph>
       </FormWrapper>
     </BackgroundWrapper>
   );

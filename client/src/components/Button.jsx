@@ -8,6 +8,8 @@ const StyledButton = styled.button`
   border: none;
   outline: none;
   transition: 0.3s;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.18),
+    0 3px 14px 2px rgba(0, 0, 0, 0.1), 0 8px 10px 1px rgba(0, 0, 0, 0.12);
 
   :hover {
     background-color: #f0daa4;

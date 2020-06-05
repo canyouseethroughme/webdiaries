@@ -1,5 +1,5 @@
 import React from "react";
-import StyledParagraph from "./StyledParagraph";
+import Paragraph from "./Paragraph";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -14,9 +14,9 @@ const Wrapper = styled.div`
 const ErrorMessage = (props) => {
   return (
     <Wrapper>
-      <StyledParagraph style={{ color: "#e74c3c", fontWeight: "500" }}>
+      <Paragraph style={{ color: "#e74c3c", fontWeight: "500" }}>
         {props.children}
-      </StyledParagraph>
+      </Paragraph>
     </Wrapper>
   );
 };

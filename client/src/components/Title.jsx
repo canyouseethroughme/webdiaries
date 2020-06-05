@@ -8,7 +8,7 @@ const StyledTitle = styled.h2`
 `;
 
 const Title = (props) => {
-  return <StyledTitle>{props.name}</StyledTitle>;
+  return <StyledTitle style={props.style}>{props.name}</StyledTitle>;
 };
 
 export default Title;

@@ -11,7 +11,7 @@ import Quote from "../components/Quote";
 import ErrorMessage from "../components/ErrorMessage";
 import BackgroundWrapper from "../components/BackgroundWrapper";
 import FormWrapper from "../components/FormWrapper";
-import StyledParagraph from "../components/StyledParagraph";
+import Paragraph from "../components/Paragraph";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -40,17 +40,18 @@ const Login = () => {
     <BackgroundWrapper>
       <FormWrapper>
         <Title name="Web Diaries" />
-        <Quote>Your private online journal.</Quote>
+        <Quote name="Your private online journal." />
       </FormWrapper>
+
       <FormWrapper>
         <Input
           type="text"
-          placeholder="Username"
+          placeholder="Username*"
           onChange={(e) => setUsername(e.target.value)}
         />
         <Input
           type="password"
-          placeholder="Password"
+          placeholder="Password*"
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button
@@ -59,9 +60,11 @@ const Login = () => {
           onClick={loginUser}
         />
       </FormWrapper>
+
       {error && <ErrorMessage>Wrong credentials.</ErrorMessage>}
+
       <FormWrapper>
-        <StyledParagraph>
+        <Paragraph>
           Don't have an account? Sign up{" "}
           <Link
             to="/sign-up"
@@ -70,8 +73,8 @@ const Login = () => {
             here
           </Link>
           .
-        </StyledParagraph>
-        <StyledParagraph>
+        </Paragraph>
+        <Paragraph>
           Forgot your password? Reset it{" "}
           <Link
             to="/forgot-password"
@@ -80,7 +83,7 @@ const Login = () => {
             here
           </Link>
           .
-        </StyledParagraph>
+        </Paragraph>
       </FormWrapper>
     </BackgroundWrapper>
   );
