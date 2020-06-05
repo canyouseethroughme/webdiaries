@@ -23,6 +23,12 @@ const CenterContainer = () => {
       <DiaryCard />
       <DiaryCard />
       <DiaryCard />
+      <DiaryCard />
+      <DiaryCard />
+      <DiaryCard />
+      <DiaryCard />
+      <DiaryCard />
+      <DiaryCard />
     </CenterContainerStyled>
   );
 };

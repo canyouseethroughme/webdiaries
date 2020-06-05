@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { instance } from "../networking/HTTPservice";
+import { quoteInstance } from "../networking/HTTPservice";
 
 import Quote from "./Quote";
 
@@ -12,7 +12,9 @@ const QOD = () => {
 
   const fetchQuote = async () => {
     try {
-      const result = await instance.get("https://quotes.rest/qod?language=en");
+      const result = await quoteInstance.get(
+        "https://quotes.rest/qod?language=en"
+      );
       if (!result.data.contents.quotes[0].quote) {
         throw new Error("No quote fetched.");
       }

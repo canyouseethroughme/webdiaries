@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const instance = axios.create({
+export const quoteInstance = axios.create({
   baseURL: "https://quotes.rest/qod?language=en",
 });
 
