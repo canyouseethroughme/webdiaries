@@ -58,6 +58,7 @@ const Login = () => {
           style={{ marginTop: "20px" }}
           name="Login"
           onClick={loginUser}
+          className="diaryButton"
         />
       </FormWrapper>
 

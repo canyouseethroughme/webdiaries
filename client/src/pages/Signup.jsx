@@ -105,6 +105,7 @@ const Signup = () => {
           style={{ marginTop: "20px" }}
           onClick={signupUser}
           name="Create account"
+          className="diaryButton"
         />
       </FormWrapper>
       {passError && <ErrorMessage>Passwords don't match.</ErrorMessage>}

@@ -43,6 +43,23 @@ router.get("/", isAuthenticated, async (req, res) => {
     }
   }
 });
+
+// #######################################################################################
+// read favorite diary
+router.get("/favorite-diaries", isAuthenticated, async (req, res) => {
+  try {
+    const favoriteDiaries = await Diary.query()
+      .select()
+      .where({ user_id: req.userId, favorite: true });
+    res.status(200).send({ response: favoriteDiaries });
+  } catch (err) {
+    if (err) {
+      console.log(`error reading your favorite diaries with ${err}`);
+      return;
+    }
+  }
+});
+
 // #######################################################################################
 // read one diary
 router.get("/:id", isAuthenticated, async (req, res) => {

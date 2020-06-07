@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+
+import { DiariesContext } from "../DiariesContext";
+import { getDiaries, getFavoriteDiaries } from "../../networking/diaries";
 
 import Paragraph from "../Paragraph";
 import Button from "../Button";
 
-const LeftMenuStyle = styled.div`
+const LeftContainerStyle = styled.div`
   width: 13rem;
   height: 100vh;
   padding-top: 10rem;
 
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 8fr 2fr;
-  align-items: top;
-  justify-items: center;
+  grid-template-rows: repeat(10, 1fr);
 
   z-index: 10;
   background-color: #3d3d3d;
@@ -21,14 +22,74 @@ const LeftMenuStyle = styled.div`
     0 3px 14px 2px rgba(0, 0, 0, 0.1), 0 8px 10px 1px rgba(0, 0, 0, 0.12);
 `;
 
-const LeftMenu = () => {
+const ContainerStyle = styled.div`
+  display: flex;
+  align-items: center;
+  padding-left: 3rem;
+  transition: 0.3s;
+  cursor: pointer;
+  :hover {
+    background-color: #4b4b4b;
+  }
+`;
+
+const paragraphStyle = {
+  fontWeight: "500",
+  paddingLeft: "5px",
+};
+
+const buttonStyle = {
+  backgroundColor: "transparent",
+  color: "#f0daa4",
+  width: "10rem",
+  height: "1.8rem",
+  boxShadow: "none",
+  border: ".5px solid #f0daa4",
+  justifySelf: "center",
+  gridRowStart: "9",
+  transition: ".3s",
+};
+
+const LeftContainer = () => {
+  const [diaries, setDiaries] = useContext(DiariesContext);
+
+  const createNewDiary = () => {
+    console.log("====================================");
+    console.log("clicked");
+    console.log("====================================");
+  };
+
+  const getAllDiaries = async () => {
+    const { data } = await getDiaries();
+    setDiaries(data.response);
+  };
+
+  const getFavDiaries = async () => {
+    const { data } = await getFavoriteDiaries();
+    setDiaries(data.response);
+  };
   return (
-    <LeftMenuStyle>
-      <Paragraph style={{ fontWeight: "500" }}>All diaries</Paragraph>
-      <Paragraph style={{ fontWeight: "500" }}>Months</Paragraph>
-      <Button name="New diary" style={{ width: "10rem" }} />
-    </LeftMenuStyle>
+    <LeftContainerStyle>
+      <ContainerStyle onClick={getAllDiaries}>
+        <span role="img" aria-label="book">
+          📔
+        </span>
+        <Paragraph style={paragraphStyle}>All diaries</Paragraph>
+      </ContainerStyle>
+      <ContainerStyle onClick={getFavDiaries}>
+        <span role="img" aria-label="star">
+          ⭐
+        </span>
+        <Paragraph style={paragraphStyle}>Favorites</Paragraph>
+      </ContainerStyle>
+      <Button
+        name="New diary"
+        style={buttonStyle}
+        className="diaryButton"
+        onClick={createNewDiary}
+      />
+    </LeftContainerStyle>
   );
 };
 
-export default LeftMenu;
+export default LeftContainer;

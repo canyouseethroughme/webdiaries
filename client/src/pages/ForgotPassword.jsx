@@ -56,6 +56,7 @@ const ForgotPassword = () => {
           style={{ marginTop: "20px" }}
           name="Reset password"
           onClick={forgotPass}
+          className="diaryButton"
         />
       </FormWrapper>
       {error && <ErrorMessage>Email not valid.</ErrorMessage>}

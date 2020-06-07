@@ -13,7 +13,8 @@ const QOD = () => {
   const fetchQuote = async () => {
     try {
       const result = await quoteInstance.get(
-        "https://quotes.rest/qod?language=en"
+        // "https://quotes.rest/qod?language=en"
+        "https://jsonplaceholder.typicode.com/todos/1"
       );
       if (!result.data.contents.quotes[0].quote) {
         throw new Error("No quote fetched.");
@@ -29,7 +30,9 @@ const QOD = () => {
     }
   };
 
-  return <Quote name={quote} />;
+  return (
+    <Quote style={{ fontSize: "23px", justifySelf: "center" }} name={quote} />
+  );
 };
 
 export default QOD;

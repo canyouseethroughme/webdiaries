@@ -22,3 +22,35 @@ p,
 input {
   font-weight: 300;
 }
+
+input {
+  width: auto;
+}
+
+img {
+  height: 18px;
+  margin-right: 5px;
+}
+
+textarea {
+  resize: none;
+}
+
+/* .diaryButton {
+  color: #f0daa4;
+  background-color: transparent;
+  width: 6rem;
+  height: 1.8rem;
+  box-shadow: none;
+  border: 0.5px solid #f0daa4;
+  transition: 0.3s;
+} */
+
+.diaryButton:hover {
+  font-size: 95%;
+}
+
+textarea::-webkit-scrollbar,
+.containerDiaries::-webkit-scrollbar {
+  display: none;
+}

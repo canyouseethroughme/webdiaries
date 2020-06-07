@@ -64,6 +64,7 @@ const UpdatePassword = () => {
           style={{ marginTop: "20px" }}
           name="Change password"
           onClick={updatePass}
+          className="diaryButton"
         />
       </FormWrapper>
       {error && (

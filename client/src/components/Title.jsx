@@ -4,7 +4,7 @@ import styled from "styled-components";
 const StyledTitle = styled.h2`
   font-family: "Shrikhand", cursive;
   font-size: 40px;
-  color: #f0daa4;
+  color: #f0932b;
 `;
 
 const Title = (props) => {

@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import wallpaper from "../static/wallpaper.jpg";
 
 const Wrapper = styled.div`
-  background: url("/login.jpg") no-repeat center center fixed;
+  background: url(${wallpaper}) no-repeat center center fixed;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
