@@ -13,8 +13,7 @@ const QOD = () => {
   const fetchQuote = async () => {
     try {
       const result = await quoteInstance.get(
-        // "https://quotes.rest/qod?language=en"
-        "https://jsonplaceholder.typicode.com/todos/1"
+        "https://quotes.rest/qod?language=en"
       );
       if (!result.data.contents.quotes[0].quote) {
         throw new Error("No quote fetched.");
