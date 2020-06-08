@@ -19,3 +19,7 @@ Steps to follow to setup the project:
    in this order: `npm run m:rollback`, `npm run m:latest` and finally `npm run s:run`
 6. When all the migrations and seeds completed, you can start the server by running `npm run start-dev` and in the
    terminal the message `server is running on port 8899 should appear`.
+
+## Client configuration
+The client represents the front-end of the app and is built with ReactJS. 
+In order to get it running, in your CLI, navigate to the /client/ folder and run the following commands: ```npm i``` and ```npm run start```. After this, the development server should start and a new browser on ```http://localhost:3000/``` will open.
