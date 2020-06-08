@@ -52,8 +52,8 @@ const Diaries = () => {
     <div>
       <Header />
       <Container>
-        <LeftContainer />
         <SelectedDiaryProvier>
+          <LeftContainer />
           <CenterContainer />
           <RightContainer />
         </SelectedDiaryProvier>

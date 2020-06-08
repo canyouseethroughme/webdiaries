@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import styled from "styled-components";
 
 import {
+  createDiary,
   getOneDiary,
   getDiaries,
   updateDiary,
@@ -122,10 +123,31 @@ const RightContainer = () => {
   const [editable, setEditable] = useState(false);
 
   useEffect(() => {
-    if (selectedDiary !== 0) {
+    if (selectedDiary !== 0 && selectedDiary !== -1) {
       getDiary(selectedDiary);
     }
+    if (selectedDiary === -1) {
+      setTitle("Insert title here.");
+      setText("Insert text here.");
+      setFavorite(0);
+      setEditable(true);
+      let newDate = new Date();
+      newDate = newDate.toISOString();
+      setUpdatedTime(
+        newDate.split("T")[1].split(":")[0] +
+          ":" +
+          newDate.split("T")[1].split(":")[1] +
+          " / " +
+          newDate.split("T")[0]
+      );
+    }
   }, [selectedDiary]);
+
+  const createNewDiary = async () => {
+    const { data } = await createDiary({ title, text, favorite });
+    setSelectedDiary(data.response.id);
+    getAllDiaries();
+  };
 
   const getAllDiaries = async () => {
     const { data } = await getDiaries();
@@ -140,7 +162,13 @@ const RightContainer = () => {
     setTitle(diary[0].title);
     setText(diary[0].text);
     setFavorite(diary[0].favorite);
-    setUpdatedTime(diary[0].updated_at.split("T")[0]);
+    setUpdatedTime(
+      diary[0].updated_at.split("T")[1].split(":")[0] +
+        ":" +
+        diary[0].updated_at.split("T")[1].split(":")[1] +
+        " / " +
+        diary[0].updated_at.split("T")[0]
+    );
   };
 
   const toggleFavorite = () => {
@@ -169,15 +197,20 @@ const RightContainer = () => {
               className="diaryButton"
               onClick={
                 editable
-                  ? async () => {
-                      await updateDiary(diaryID, {
-                        title,
-                        text,
-                        favorite,
-                      });
-                      getAllDiaries();
-                      setEditable(!editable);
-                    }
+                  ? selectedDiary !== -1
+                    ? async () => {
+                        await updateDiary(diaryID, {
+                          title,
+                          text,
+                          favorite,
+                        });
+                        getAllDiaries();
+                        setEditable(!editable);
+                      }
+                    : () => {
+                        createNewDiary();
+                        setEditable(!editable);
+                      }
                   : () => setEditable(!editable)
               }
             />
@@ -185,11 +218,15 @@ const RightContainer = () => {
               name="Delete diary"
               style={buttonStyle}
               className="diaryButton"
-              onClick={async () => {
-                await deleteDiary(diaryID);
-                getAllDiaries();
-                setSelectedDiary(0);
-              }}
+              onClick={
+                selectedDiary !== -1
+                  ? async () => {
+                      await deleteDiary(diaryID);
+                      getAllDiaries();
+                      setSelectedDiary(0);
+                    }
+                  : () => setSelectedDiary(0)
+              }
             />
           </DiaryButtons>
           <ContainerStyle>

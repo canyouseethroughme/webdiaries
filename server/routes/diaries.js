@@ -34,7 +34,10 @@ router.post("/create-diary", isAuthenticated, async (req, res) => {
 // read all diaries
 router.get("/", isAuthenticated, async (req, res) => {
   try {
-    const diaries = await Diary.query().select().where({ user_id: req.userId });
+    const diaries = await Diary.query()
+      .select()
+      .orderBy("updated_at", "desc")
+      .where({ user_id: req.userId });
     res.status(200).send({ response: diaries });
   } catch (err) {
     if (err) {
@@ -50,6 +53,7 @@ router.get("/favorite-diaries", isAuthenticated, async (req, res) => {
   try {
     const favoriteDiaries = await Diary.query()
       .select()
+      .orderBy("updated_at", "desc")
       .where({ user_id: req.userId, favorite: true });
     res.status(200).send({ response: favoriteDiaries });
   } catch (err) {

@@ -128,11 +128,11 @@ textarea::-webkit-scrollbar,
 }
 
 input:checked + .slider {
-  background-color: #f0daa4;
+  background-color: #f0932b;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #f0daa4;
+  box-shadow: 0 0 1px #f0932b;
 }
 
 input:checked + .slider:before {

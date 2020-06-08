@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 
 import { DiariesContext } from "../DiariesContext";
+import { SelectedDiaryContext } from "../SelectedDiaryContext";
 import { getDiaries, getFavoriteDiaries } from "../../networking/diaries";
 
 import Paragraph from "../Paragraph";
@@ -52,11 +53,10 @@ const buttonStyle = {
 
 const LeftContainer = () => {
   const [diaries, setDiaries] = useContext(DiariesContext);
+  const [selectedDiary, setSelectedDiary] = useContext(SelectedDiaryContext);
 
   const createNewDiary = () => {
-    console.log("====================================");
-    console.log("clicked");
-    console.log("====================================");
+    setSelectedDiary(-1);
   };
 
   const getAllDiaries = async () => {
