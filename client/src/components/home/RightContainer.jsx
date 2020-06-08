@@ -3,11 +3,13 @@ import styled from "styled-components";
 
 import {
   getOneDiary,
+  getDiaries,
   updateDiary,
   deleteDiary,
 } from "../../networking/diaries";
 
 import { SelectedDiaryContext } from "../SelectedDiaryContext";
+import { DiariesContext } from "../DiariesContext";
 import Paragraph from "../Paragraph";
 import Button from "../Button";
 import notebook from "../../static/notebook.png";
@@ -111,6 +113,7 @@ const buttonStyle = {
 
 const RightContainer = () => {
   const [selectedDiary, setSelectedDiary] = useContext(SelectedDiaryContext);
+  const [diaries, setDiaries] = useContext(DiariesContext);
   const [diaryID, setDiaryID] = useState("");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -123,6 +126,11 @@ const RightContainer = () => {
       getDiary(selectedDiary);
     }
   }, [selectedDiary]);
+
+  const getAllDiaries = async () => {
+    const { data } = await getDiaries();
+    setDiaries(data.response);
+  };
 
   const getDiary = async (id) => {
     const {
@@ -167,6 +175,7 @@ const RightContainer = () => {
                         text,
                         favorite,
                       });
+                      getAllDiaries();
                       setEditable(!editable);
                     }
                   : () => setEditable(!editable)
@@ -178,6 +187,7 @@ const RightContainer = () => {
               className="diaryButton"
               onClick={async () => {
                 await deleteDiary(diaryID);
+                getAllDiaries();
                 setSelectedDiary(0);
               }}
             />
@@ -185,7 +195,7 @@ const RightContainer = () => {
           <ContainerStyle>
             <textarea
               style={titleStyle}
-              maxLength={60}
+              maxLength={40}
               value={title}
               disabled={editable ? false : true}
               onChange={(e) => setTitle(e.target.value)}
