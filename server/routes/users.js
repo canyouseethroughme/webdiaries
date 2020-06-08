@@ -57,7 +57,9 @@ router.post("/login", async (req, res) => {
               user_id: user.id,
             });
           }
-          return res.status(200).send({ username: user.username, token });
+          return res
+            .status(200)
+            .send({ username: user.username, userID: user.id, token });
         }
       });
     } else {

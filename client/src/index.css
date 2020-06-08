@@ -8,16 +8,18 @@ body {
   background-color: #4b4b4b;
   color: #f3f3f3;
 }
-
+details,
 button,
 p,
 input {
   font-family: "Poppins", sans-serif;
 }
+
 button {
   font-weight: 500;
 }
 
+details,
 p,
 input {
   font-weight: 300;
@@ -31,26 +33,119 @@ img {
   height: 18px;
   margin-right: 5px;
 }
+details {
+  color: #f0daa4;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 30px;
+  top: 2rem;
+}
+summary {
+  outline: none;
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 500;
+}
+
+.summaryButton:hover,
+summary:hover {
+  color: #f0932b;
+  transition: 0.3s;
+  background-color: transparent !important;
+}
+
+.summaryButton {
+  color: #f0daa4;
+  width: auto !important;
+  background-color: transparent;
+  font-weight: 400;
+  justify-self: end;
+  box-shadow: none !important;
+  color: "f0daa4";
+  padding-right: 10px;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
 
 textarea {
   resize: none;
 }
 
-/* .diaryButton {
-  color: #f0daa4;
-  background-color: transparent;
-  width: 6rem;
-  height: 1.8rem;
-  box-shadow: none;
-  border: 0.5px solid #f0daa4;
-  transition: 0.3s;
-} */
-
 .diaryButton:hover {
   font-size: 95%;
+  color: #f0932b !important;
+  border: 0.5px solid #f0932b !important;
 }
 
 textarea::-webkit-scrollbar,
 .containerDiaries::-webkit-scrollbar {
   display: none;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 14px;
+  justify-self: end;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #4b4b4b;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  bottom: 1px;
+  left: 2px;
+  background-color: #f3f3f3;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+input:checked + .slider {
+  background-color: #f0daa4;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #f0daa4;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(14px);
+  -ms-transform: translateX(14px);
+  transform: translateX(14px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 14px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

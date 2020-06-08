@@ -58,10 +58,18 @@ const dateStyle = {
   justifySelf: "end",
 };
 
+const favoriteStyle = {
+  fontSize: "13px",
+  position: "relative",
+  bottom: "3px",
+  right: "60px",
+};
+
 const textareaStyle = {
   gridColumn: "1 / span 2",
   fontFamily: "Poppins, sans-serif",
   fontSize: "15px",
+  fontWeight: "200",
   marginTop: "30px",
   paddingBottom: "50px",
   height: "70%",
@@ -90,11 +98,12 @@ const nodiaryStyle = {
 const buttonStyle = {
   backgroundColor: "transparent",
   color: "#f0daa4",
-  width: "8rem",
+  width: "6rem",
   height: "1.8rem",
   boxShadow: "none",
   border: ".5px solid #f0daa4",
   marginRight: "30px",
+  fontWeight: "300",
   transition: ".3s",
 };
 
@@ -126,6 +135,14 @@ const RightContainer = () => {
     setUpdatedTime(diary[0].updated_at.split("T")[0]);
   };
 
+  const toggleFavorite = () => {
+    if (favorite === 1) {
+      setFavorite(0);
+    } else {
+      setFavorite(1);
+    }
+  };
+
   return (
     <WrapperStyle>
       {selectedDiary === 0 ? (
@@ -145,7 +162,11 @@ const RightContainer = () => {
               onClick={
                 editable
                   ? async () => {
-                      await updateDiary(diaryID, { title, text, favorite: 0 });
+                      await updateDiary(diaryID, {
+                        title,
+                        text,
+                        favorite,
+                      });
                       setEditable(!editable);
                     }
                   : () => setEditable(!editable)
@@ -157,6 +178,7 @@ const RightContainer = () => {
               className="diaryButton"
               onClick={async () => {
                 await deleteDiary(diaryID);
+                setSelectedDiary(0);
               }}
             />
           </DiaryButtons>
@@ -168,18 +190,20 @@ const RightContainer = () => {
               disabled={editable ? false : true}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <Paragraph style={dateStyle}>
-              {updatedTime}
-              {favorite === 1 ? (
-                <span role="img" aria-label="star">
-                  ⭐
-                </span>
-              ) : (
-                <span role="img" aria-label="star">
-                  ✩
-                </span>
+            <div style={{ display: "grid" }}>
+              <Paragraph style={dateStyle}>{updatedTime}</Paragraph>
+              {editable && (
+                <label className="switch">
+                  <Paragraph style={favoriteStyle}>Favorite</Paragraph>
+                  <input
+                    type="checkbox"
+                    checked={favorite === 1 ? true : false}
+                    onChange={toggleFavorite}
+                  />
+                  <span className="slider round"></span>
+                </label>
               )}
-            </Paragraph>
+            </div>
             <textarea
               style={textareaStyle}
               value={text}

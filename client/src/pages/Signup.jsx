@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { PropagateLoader } from "react-spinners";
 
 import { signup } from "../networking/users";
 
@@ -12,6 +13,13 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 import FormWrapper from "../components/FormWrapper";
 import Paragraph from "../components/Paragraph";
 
+const spinnerStyle = {
+  margin: "auto",
+  width: "1rem",
+  height: "2rem",
+  marginTop: "20px",
+};
+
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [firstName, setFirstname] = useState("");
@@ -21,6 +29,7 @@ const Signup = () => {
   const [repeatedPassword, setRepeatedPassword] = useState("");
   const [error, setError] = useState(false);
   const [passError, setPassError] = useState(false);
+  const [loader, setLoader] = useState(true);
   const history = useHistory();
 
   const signupUser = async () => {
@@ -41,6 +50,10 @@ const Signup = () => {
           setPassError(false);
         }, 2000);
       } else {
+        setLoader(false);
+        setTimeout(() => {
+          setLoader(true);
+        }, 2000);
         const { data } = await signup({
           username,
           firstName,
@@ -60,7 +73,7 @@ const Signup = () => {
         setError(false);
       }, 2000);
       console.log("====================================");
-      console.log("There is a signup problem. Error: ", err);
+      console.log("There is a signup problem. Error: ", err.message);
       console.log("====================================");
     }
   };
@@ -101,12 +114,15 @@ const Signup = () => {
           placeholder="Repeat password*"
           onChange={(e) => setRepeatedPassword(e.target.value)}
         />
-        <Button
-          style={{ marginTop: "20px" }}
-          onClick={signupUser}
-          name="Create account"
-          className="diaryButton"
-        />
+        {loader ? (
+          <Button
+            style={{ marginTop: "20px" }}
+            onClick={signupUser}
+            name="Create account"
+          />
+        ) : (
+          <PropagateLoader color={"#f3f3f3"} css={spinnerStyle} />
+        )}
       </FormWrapper>
       {passError && <ErrorMessage>Passwords don't match.</ErrorMessage>}
       {error && <ErrorMessage>Missing or incomplete fields.</ErrorMessage>}

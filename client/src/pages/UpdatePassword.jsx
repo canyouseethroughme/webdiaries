@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { PropagateLoader } from "react-spinners";
 
 import { updatePassword } from "../networking/users";
 
@@ -12,11 +13,19 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 import FormWrapper from "../components/FormWrapper";
 import Paragraph from "../components/Paragraph";
 
+const spinnerStyle = {
+  margin: "auto",
+  width: "1rem",
+  height: "2rem",
+  marginTop: "20px",
+};
+
 const UpdatePassword = () => {
   const [newPassword, setPassword] = useState("");
   const [newRepeatedPassword, setRepeatedPassword] = useState("");
   const [passError, setPassError] = useState(false);
   const [error, setError] = useState(false);
+  const [loader, setLoader] = useState(true);
   const history = useHistory();
 
   const updatePass = async () => {
@@ -32,6 +41,10 @@ const UpdatePassword = () => {
           setError(false);
         }, 2000);
       } else {
+        setLoader(false);
+        setTimeout(() => {
+          setLoader(true);
+        }, 2000);
         const token = window.location.href.split("/")[4];
         updatePassword(token, { newPassword, newRepeatedPassword });
         history.push("/");
@@ -60,12 +73,15 @@ const UpdatePassword = () => {
           placeholder="Repeat password"
           onChange={(e) => setRepeatedPassword(e.target.value)}
         />
-        <Button
-          style={{ marginTop: "20px" }}
-          name="Change password"
-          onClick={updatePass}
-          className="diaryButton"
-        />
+        {loader ? (
+          <Button
+            style={{ marginTop: "20px" }}
+            name="Change password"
+            onClick={updatePass}
+          />
+        ) : (
+          <PropagateLoader color={"#f3f3f3"} css={spinnerStyle} />
+        )}
       </FormWrapper>
       {error && (
         <ErrorMessage>Password must have more than 6 characters.</ErrorMessage>

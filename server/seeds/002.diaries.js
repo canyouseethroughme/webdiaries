@@ -6,7 +6,7 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex("diaries").insert([
         {
-          title: "Friday weirdness and tequila weekends",
+          title: "Friday weirdness and tequila weekends 🚀",
           text: `M gave me a few moments of computer access, mainly to prepare for tomorrow's workday. This weekend has been exhausting and right now, i have a major hangover from the tequila. Believe me, the alcohol made it all easier.
           Friday, we talked about new boundaries and what he wanted for us this weekend. He over dramatizes but this time,not so much. He out and out made his desires known.When i'm at work tomorrow, i'll spill.
           
@@ -21,8 +21,8 @@ exports.seed = function (knex) {
           user_id: 1,
         },
         {
-          title: "Who the hell text so early on a Sunday morning?",
-          text: `Got woken up at 8AM!!! On a Sunday morning!1 You kidding me? But it was Jenny... so she's forgiven. Haha. She asked if we could do breakfast later. TBH, I sorta forgot we set that up. She asked if 10:30AM would be ok and I said that's more than fine. Apparently, $2 Buck Chuck bottles of wine can still get you drunk.
+          title: "Who the hell text so early on a Sunday morning? 📱",
+          text: `Got woken up at 8AM⏰!!! On a Sunday morning!1 You kidding me? But it was Jenny... so she's forgiven. Haha. She asked if we could do breakfast later. TBH, I sorta forgot we set that up. She asked if 10:30AM would be ok and I said that's more than fine. Apparently, $2 Buck Chuck bottles of wine can still get you drunk.
 
           Then Missy texted too. She was with the meetup group for a few years but disappeared being a busy single Mom. I used to call her Suzy Homemaker because she had that kind of personality. She's cool though and pretty innocent except for that one time at adult camp years ago and drunkenly grabbed my ass. lol. Anyway, I asked is she wanted to join us for breakfast and she said ok. So it'll be three of us and it'll be fun to catch up with each other's lives once again.
           
@@ -39,7 +39,7 @@ exports.seed = function (knex) {
           user_id: 1,
         },
         {
-          title: "Today is my sister's Birthday",
+          title: "Today is my sister's Birthday🎂🎉🥳",
           text: `Today is my sister’s birthday. She turned 65 this year and has been doing all the Medicare search and paperwork this past week or so. She showed me the books that have all the programs for her particular chosen Medicare deal. I call it deal but I know that’s not the right word. I remember when Mom had to choose her Medicare health and then renew it every year. It sucked. I am not looking forward to that day when I have to choose a Medicare package. Luckily I don’t have to for now.
           She will be spending her birthday fairly quiet. She will probably see her son and then talk with grandchildren via skype or facetime and then do her regular Sunday activities. Since the pandemic and quarantine she rarely goes anywhere other than to the store, or doctor appointments. She isn’t anxious to go to the reopening’s of anywhere including church. Don’t blame her.
           Well it seems that the “argument “between Cousin J and Niece D has escalated a little further. Two of our cousins defended Diane and one was his brother I am guessing although he didn’t post it but as a result (and he blames the cousin) my niece unfriended him. It couldn’t be the obnoxious attitude and belligerent attitude you had would it? I am staying out of it. I would like to tell him off but as I said to Liz it would backfire on me.
@@ -50,7 +50,7 @@ exports.seed = function (knex) {
           user_id: 1,
         },
         {
-          title: "All Around Me",
+          title: "All Around Me🌎",
           text: `The air turned black all around me, as my phone started to ring! I had a bad feeling Don Paradis was going to call me. Sure enough when my phone rang it was Don Paradis. He just come by as he was leaving the VA hospital!
           I told him there was no way I could let him in the building when I saw him in may. Plus I wasn't home when he showed up. So what's the deal with him just showing up.
           Oh I know what it is .... He is off probation now so he thinks things are going to be just like they were when I lived at Barton apartments. You know he was an ass hole to me when I lived at Barton apartments. I doubt things will be any different now. But maybe he thinks I'll take pitty on him due to his cancer.
@@ -59,7 +59,7 @@ exports.seed = function (knex) {
           user_id: 1,
         },
         {
-          title: "Lightening Up",
+          title: "Lightening Up💡",
           text: `I've been a little heavy lately. My lust for Mr. Curved Line has been very grounding, very earthy. I like that solidness to my feelings, I do so enjoy my dark recesses and wandering their winding corridors, map in one hand and a candle in the other. Discovering new ways of thinking about myself and others is fascinating, opulent work. But the weight of it is grounding, and I have another place I'd like to flit to on a swirling breeze. I do have, so called, loftier concerns.
 
           A strange aside to my deep want of Mr. Curved Line is the way it affects my spirituality, rather how his wife's words have. She was arresting in her frankness and communication of things I thought too important for a first chat. She made a point out of telling me to hold fast to her story that she had passed on to me, a message of sorts, and I feel it resonating in that particular way my views call on me. And so I have thoughts not of this terrestrial plane and it feels like a homecoming of sorts. I am never far from my faith, some of us have a shorter tether. And mine has pulled taunt and I am happily snapping back to my home.
@@ -71,7 +71,7 @@ exports.seed = function (knex) {
           user_id: 1,
         },
         {
-          title: "I spoke too soon",
+          title: "I spoke 🦜 too soon",
           text: `Update. In life in general. Coronavirus, George Floyd murder, looters and riots, chaos all around.
 
           I am in finance at Harley. Loving it. It is crazy and fast paced but just what I need.
